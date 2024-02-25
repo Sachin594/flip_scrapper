@@ -8,10 +8,12 @@ import pymongo
 logging.basicConfig(filename="scrapper1.log",level=logging.INFO)
 app=Flask(__name__)
 @app.route('/',methods=['GET'])
+@cross_origin()
 def home_page():
     return render_template('index.html')
 
 @app.route('/review',methods=['POST','GET'])
+@cross_origin()
 def index():
     if request.method=='POST':
         try :
@@ -70,23 +72,7 @@ def index():
 
             
             
-            from pymongo.mongo_client import MongoClient
-
-            uri = "mongodb+srv://Sachin947:sachin@cluster947.n1o4otf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster947"
-
-            # Create a new client and connect to the server
-            client = MongoClient(uri)
-
-            # Send a ping to confirm a successful connection
-            try:
-                client.admin.command('ping')
-                print("Pinged your deployment. You successfully connected to MongoDB!")
-            except Exception as e:
-                print(e)
-                
-            db=client['Reviews']
-            col=db['Review scrap']
-            col.insert_many(reviews)
+           
         
         except Exception as e1:
             logging.info(e1)
@@ -96,9 +82,9 @@ def index():
     else:
         return render_template('index.html')
   
-if __name__=='__main__' :
+if __name__ == "__main__":
     app.run(host='0.0.0.0')
-
+	#app.run(debug=True)
         
     
     
