@@ -30,10 +30,11 @@ def index():
             box =bigbox[0].div.find('a',{'class':'_1fQZEK'})['href']
             product_page=requests.get('https://www.flipkart.com'+box)
             product_html=bs(product_page.text,'html.parser')
+	    print(product_html)
             comment_boxes=product_html.find_all('div',{'class':'_16PBlm'})
             filename=searchstring+'.csv'
             s=open(filename,'w')
-            headers='Product,Customer,Rating,Heading,Comment'
+            headers='Product,Customer,Rating,Heading,Comment\n'
             s.write(headers)
             reviews=[]
         
@@ -70,11 +71,7 @@ def index():
                 mydict={'Product':searchstring,"Name":name,"Rating":rating,"CommentHead":commenthead,"Comment":comment}
                 reviews.append(mydict)
             
-            
-
-
-            
-                       
+                     
             return render_template('result.html',reviews=reviews[0:len(reviews)-1])
 
             
@@ -82,7 +79,7 @@ def index():
            
         
         except Exception as e1:
-            
+            print('The error message is ',e)
             return 'Something Is Wrong'
         
     # return render_template('results.html')    
