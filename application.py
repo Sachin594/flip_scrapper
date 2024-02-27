@@ -67,7 +67,28 @@ def index():
                 
                 mydict={'Product':searchstring,"Name":name,"Rating":rating,"CommentHead":commenthead,"Comment":comment}
                 reviews.append(mydict)
-            logging.info('my final results are {}'.format(reviews))
+            
+            
+
+
+            from pymongo.mongo_client import MongoClient
+
+            uri = "mongodb+srv://Sachin947:sachin@cluster947.n1o4otf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster947"
+
+            # Create a new client and connect to the server
+            client = MongoClient(uri)
+
+            # Send a ping to confirm a successful connection
+            try:
+                client.admin.command('ping')
+                print("Pinged your deployment. You successfully connected to MongoDB!")
+            except Exception as e:
+                print(e)
+                
+            db=client['flip_scrap']
+            col=db['flip_scrap_data']
+            col.insert_many(reviews)
+                       
             return render_template('result.html',reviews=reviews[0:len(reviews)-1])
 
             
@@ -83,7 +104,7 @@ def index():
         return render_template('index.html')
   
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='127.0.0.1', port=8000, debug=True)
 	#app.run(debug=True)
         
     
