@@ -30,7 +30,6 @@ def index():
             box =bigbox[0].div.find('a',{'class':'_1fQZEK'})['href']
             product_page=requests.get('https://www.flipkart.com'+box)
             product_html=bs(product_page.text,'html.parser')
-	    print(product_html)
             comment_boxes=product_html.find_all('div',{'class':'_16PBlm'})
             filename=searchstring+'.csv'
             s=open(filename,'w')
