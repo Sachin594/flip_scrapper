@@ -3,10 +3,12 @@ from flask_cors import CORS,cross_origin
 import requests
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen as uReq
-import logging
-logging.basicConfig(filename="scrapper1.log",level=logging.INFO)
+
+
 application = Flask(__name__)
 app = application
+
+
 @app.route('/',methods=['GET'])
 @cross_origin()
 def home_page():
@@ -41,7 +43,7 @@ def index():
                     name=i.div.find('p',{'class':'_2sc7ZR _2V5EHH'}).text
                 
                 except:
-                    logging.info('name')
+                    
                 
                 try:
                     #rating.encode(encoding='utf-8')
@@ -57,13 +59,13 @@ def index():
                 
                 except:
                     commenthead='NO COMMENT HEAD'
-                    logging.info('commenthead')
+                   
             
                 try:
                     comment=i.find('div',{'class':''}).text
                 
                 except Exception as e :
-                    logging.info(e)
+                    
                 
                 mydict={'Product':searchstring,"Name":name,"Rating":rating,"CommentHead":commenthead,"Comment":comment}
                 reviews.append(mydict)
@@ -80,7 +82,7 @@ def index():
            
         
         except Exception as e1:
-            logging.info(e1)
+            
             return 'Something Is Wrong'
         
     # return render_template('results.html')    
