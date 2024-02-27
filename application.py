@@ -21,10 +21,8 @@ def index():
         try :
             searchstring=request.form['content'].replace(' ','')
             url="https://www.flipkart.com/search?q="+ searchstring
-            urlclient=uReq(url)
-            flipkart_page=urlclient.read()
-            urlclient.close()
-            flipkart_html=bs(flipkart_page,'html.parser')
+            flipkart_page=requests.get(url)
+            flipkart_html=bs(flipkart_page.text,'html.parser')
             bigbox=flipkart_html.find_all('div',{'class':'_1AtVbE col-12-12'})
             del bigbox[0:2]
             box =bigbox[0].div.find('a',{'class':'_1fQZEK'})['href']
