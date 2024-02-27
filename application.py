@@ -6,7 +6,7 @@ from urllib.request import urlopen as uReq
 import logging
 import pymongo
 logging.basicConfig(filename="scrapper1.log",level=logging.INFO)
-application=app
+
 app=Flask(__name__)
 @app.route('/',methods=['GET'])
 @cross_origin()
