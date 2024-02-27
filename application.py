@@ -22,8 +22,8 @@ def index():
             searchstring=request.form['content'].replace(' ','')
             url="https://www.flipkart.com/search?q="+ searchstring
             uclient=uReq(url)
-	    flipakrt_page=uclient.read()
-	    uclient.close()
+	        flipakrt_page=uclient.read()
+	        uclient.close()
             flipkart_html=bs(flipkart_page,'html.parser')
             bigbox=flipkart_html.find_all('div',{'class':'_1AtVbE col-12-12'})
             del bigbox[0:2]
@@ -90,5 +90,6 @@ if __name__ == "__main__":
 	#app.run(debug=True)
         
     
+        
     
         
