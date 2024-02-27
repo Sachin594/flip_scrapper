@@ -4,7 +4,6 @@ import requests
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen as uReq
 import logging
-import pymongo
 logging.basicConfig(filename="scrapper1.log",level=logging.INFO)
 application = Flask(__name__)
 app = application
@@ -72,23 +71,7 @@ def index():
             
 
 
-            from pymongo.mongo_client import MongoClient
-
-            uri = "mongodb+srv://Sachin947:sachin@cluster947.n1o4otf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster947"
-
-            # Create a new client and connect to the server
-            client = MongoClient(uri)
-
-            # Send a ping to confirm a successful connection
-            try:
-                client.admin.command('ping')
-                print("Pinged your deployment. You successfully connected to MongoDB!")
-            except Exception as e:
-                print(e)
-                
-            db=client['flip_scrap']
-            col=db['flip_scrap_data']
-            col.insert_many(reviews)
+            
                        
             return render_template('result.html',reviews=reviews[0:len(reviews)-1])
 
