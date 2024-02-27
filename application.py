@@ -1,4 +1,3 @@
-from flask import Flask, render_template, request,jsonify
 from flask_cors import CORS,cross_origin
 import requests
 from bs4 import BeautifulSoup as bs
@@ -22,8 +21,8 @@ def index():
             searchstring=request.form['content'].replace(' ','')
             url="https://www.flipkart.com/search?q="+ searchstring
             uclient=uReq(url)
-		flipkart_page=uclient.read()
-	        uclient.close()
+            flipkart_page=uclient.read()
+            uclient.close()
             flipkart_html=bs(flipkart_page,'html.parser')
             bigbox=flipkart_html.find_all('div',{'class':'_1AtVbE col-12-12'})
             del bigbox[0:2]
@@ -88,8 +87,6 @@ def index():
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000, debug=True)
 	#app.run(debug=True)
-        
-    
         
     
         
