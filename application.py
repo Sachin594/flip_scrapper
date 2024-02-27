@@ -43,7 +43,7 @@ def index():
                     name=i.div.find('p',{'class':'_2sc7ZR _2V5EHH'}).text
                 
                 except:
-                    
+                    name='no name'
                 
                 try:
                     #rating.encode(encoding='utf-8')
@@ -51,7 +51,7 @@ def index():
                 
                 except:
                     rating='No Rating'
-                    logging.info('rating')
+                    
                 
                 try:
                     #commenthead.encodw(encoding='utf8)
@@ -65,7 +65,7 @@ def index():
                     comment=i.find('div',{'class':''}).text
                 
                 except Exception as e :
-                    
+                    print('exception while creating dictionary',e)
                 
                 mydict={'Product':searchstring,"Name":name,"Rating":rating,"CommentHead":commenthead,"Comment":comment}
                 reviews.append(mydict)
